@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TreeEditor;
 using UnityEngine;
 
-public class Airo : MonoBehaviour
+public class AiroOikea : MonoBehaviour
 {
 
     public Vector3 rotateVertical;
@@ -12,6 +12,7 @@ public class Airo : MonoBehaviour
 
     public float smooth = 5.0f;
     public float tiltAngle = 60.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,7 @@ public class Airo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        /*if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.Rotate(rotateVertical * Time.deltaTime * speed);
         }
@@ -40,18 +41,21 @@ public class Airo : MonoBehaviour
             transform.Rotate(rotateHorizontal * Time.deltaTime * speed * -1);
         }
 
-        /*float x = Input.GetAxis("Horizontal");
+        float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
         transform.Rotate(new Vector3(0, x, 0));
         transform.Rotate(new Vector3(0, 0, y));*/
 
-        float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngle;
-        float tiltAroundY = Input.GetAxis("Vertical") * tiltAngle;
+        float tiltAroundZ = Input.GetAxis("Horizontal Right Stick") * tiltAngle;
+        float tiltAroundY = Input.GetAxis("Vertical Right Stick") * tiltAngle;
 
-        Quaternion target = Quaternion.Euler(0, -tiltAroundY, tiltAroundZ);
+        Quaternion target = Quaternion.Euler(0, -tiltAroundY, -tiltAroundZ);
 
-        transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, target, Time.deltaTime * smooth);
+
+
+
 
 
     }
